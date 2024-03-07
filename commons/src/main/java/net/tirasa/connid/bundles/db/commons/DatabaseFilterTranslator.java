@@ -23,6 +23,7 @@
  */
 package net.tirasa.connid.bundles.db.commons;
 
+import org.identityconnectors.common.logging.Log;
 import org.identityconnectors.framework.common.objects.Attribute;
 import org.identityconnectors.framework.common.objects.AttributeUtil;
 import org.identityconnectors.framework.common.objects.ObjectClass;
@@ -46,6 +47,7 @@ import org.identityconnectors.framework.common.objects.filter.StartsWithFilter;
  * @since 1.0
  */
 public abstract class DatabaseFilterTranslator extends AbstractFilterTranslator<FilterWhereBuilder> {
+    private static final Log LOG = Log.getLog(DatabaseFilterTranslator.class);
 
     ObjectClass oclass;
 
@@ -285,6 +287,6 @@ public abstract class DatabaseFilterTranslator extends AbstractFilterTranslator<
      */
     protected boolean validateSearchAttribute(final Attribute attribute) {
         //Ignore streamed ( byte[] objects ) from query, otherwise let the database process
-        return attribute.getValue() == null || !byte[].class.equals(AttributeUtil.getSingleValue(attribute).getClass());
+        return AttributeUtil.getSingleValue(attribute) == null || !byte[].class.equals(AttributeUtil.getSingleValue(attribute).getClass());
     }
 }
