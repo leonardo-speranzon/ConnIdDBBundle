@@ -87,6 +87,7 @@ import org.identityconnectors.framework.common.objects.Name;
 import org.identityconnectors.framework.common.objects.ObjectClass;
 import org.identityconnectors.framework.common.objects.ObjectClassInfo;
 import org.identityconnectors.framework.common.objects.ObjectClassInfoBuilder;
+import org.identityconnectors.framework.common.objects.OperationOptionInfoBuilder;
 import org.identityconnectors.framework.common.objects.OperationOptions;
 import org.identityconnectors.framework.common.objects.OperationalAttributeInfos;
 import org.identityconnectors.framework.common.objects.OperationalAttributes;
@@ -1139,6 +1140,7 @@ public class DatabaseTableConnector implements
         ociB.addAllAttributeInfo(attrInfoSet);
         final ObjectClassInfo oci = ociB.build();
         schemaBld.defineObjectClass(oci);
+        schemaBld.defineOperationOption(OperationOptionInfoBuilder.buildAttributesToGet(), SearchOp.class);
 
         /*
          * Note: AuthenticateOp, and all the 'SPIOperation'-s are by default added by Reflection API to the Schema.
