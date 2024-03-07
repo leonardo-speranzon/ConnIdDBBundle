@@ -285,6 +285,6 @@ public abstract class DatabaseFilterTranslator extends AbstractFilterTranslator<
      */
     protected boolean validateSearchAttribute(final Attribute attribute) {
         //Ignore streamed ( byte[] objects ) from query, otherwise let the database process
-        return !byte[].class.equals(AttributeUtil.getSingleValue(attribute).getClass());
+        return attribute.getValue() == null || !byte[].class.equals(AttributeUtil.getSingleValue(attribute).getClass());
     }
 }
